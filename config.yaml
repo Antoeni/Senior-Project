@@ -1,8 +1,0 @@
-
-path: C:\Users\nguye\Desktop\SeniorProject\seniorProj\Data #path to data
-train: images\train
-val: images\train
-
-
-names:
- 0: person
