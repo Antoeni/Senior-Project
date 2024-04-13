@@ -4,9 +4,8 @@ from ultralytics.solutions import heatmap
 import cv2
 import json
 
-model = YOLO("best_2-23.pt")
+model = YOLO("best-4_5.pt")
 cap = cv2.VideoCapture('vidp.mp4')
-f = open('dataOutput2', 'a')
 names = model.names
 assert cap.isOpened(), "Error reading video file"
 fps = cap.get(cv2.CAP_PROP_FPS)
@@ -25,7 +24,7 @@ video_writer = cv2.VideoWriter("heatmap_output.avi",
 
 # Init heatmap
 heatmap_obj = heatmap.Heatmap()
-heatmap_obj.set_args(colormap=cv2.COLORMAP_WINTER,
+heatmap_obj.set_args(colormap=cv2.COLORMAP_PLASMA,
                      imw=target_width,
                      imh=target_height,
                      view_img=True,
@@ -57,7 +56,6 @@ while cap.isOpened():
     if cv2.waitKey(1) == ord("q"):
         break
 
-f.close()
 cap.release()
 video_writer.release()
 cv2.destroyAllWindows()

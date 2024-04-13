@@ -1,0 +1,6 @@
+path: C:\Users\nguye\SenioProject\pythonProject\Training
+train: images\train
+val: images\train
+
+names:
+  0: person
