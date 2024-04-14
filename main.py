@@ -4,7 +4,7 @@ from ultralytics.solutions import heatmap
 import cv2
 import json
 
-model = YOLO("best_2-23.pt")
+model = YOLO("best_4-5.pt")
 cap = cv2.VideoCapture('vidp.mp4')
 f = open('dataOutput2', 'a')
 names = model.names
