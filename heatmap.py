@@ -5,7 +5,7 @@ import cv2
 import json
 from ultralytics import YOLO
 from ultralytics.solutions import heatmap
-
+import subprocess
 
 class Heatmap(ttk.Frame):
     def __init__(self, master):
@@ -95,6 +95,7 @@ class Heatmap(ttk.Frame):
                 # Read detected values from the file
                 with open('dataOutput.txt', 'r') as file:
                     detected_from_file = json.load(file)
+		    human_density = subprocess.check_output(['./calc.sh'], shell=False).decode()
 
                 # Update the label text with the values from the file
                 self.detected_text.set(json.dumps(detected_from_file))
