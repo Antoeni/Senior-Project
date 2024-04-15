@@ -5,7 +5,6 @@ import cv2
 import json
 from ultralytics import YOLO
 from ultralytics.solutions import heatmap
-import subprocess
 
 class Heatmap(ttk.Frame):
     def __init__(self, master):
@@ -34,12 +33,12 @@ class Heatmap(ttk.Frame):
         self.model = YOLO("best-4_5.pt")
         self.names = self.model.names
         self.detected_text = tk.StringVar()
-
+        self.person_text = tk.StringVar()
         self.heatmap_obj = heatmap.Heatmap()
         self.heatmap_obj.set_args(colormap=cv2.COLORMAP_PLASMA,
                                   imw=self.target_width,
                                   imh=self.target_height,
-                                  view_img=True,
+                                  view_img=False,
                                   shape="circle")
 
         self.Heatmap_creation()
@@ -65,13 +64,21 @@ class Heatmap(ttk.Frame):
         self.notebook.add(self.tab_1, text="Person Detected")
 
         # Label
-        self.label = ttk.Label(
+        self.density_label = ttk.Label(
             self.tab_1,
             textvariable=self.detected_text,
             justify="center",
             font=("-size", 15, "-weight", "bold"),
         )
-        self.label.grid(row=1, column=0, pady=10, columnspan=2)
+        self.density_label.grid(row=1, column=0, pady=10, columnspan=2)
+
+        self.person_label = ttk.Label(
+            self.tab_1,
+            textvariable=self.person_text,
+            justify="center",
+            font=("-size", 15, "-weight", "bold"),
+        )
+        self.person_label.grid(row=2, column=0, pady=10)
 
         # Sizegrip
         self.sizegrip = ttk.Sizegrip(self)
@@ -90,15 +97,19 @@ class Heatmap(ttk.Frame):
                 detected = dict(zip(self.names.values(), personDetection))
                 with open('dataOutput.txt', 'w') as convert_file:
                     convert_file.write(json.dumps(detected))
+                with open('dataOutput2', 'w') as convert_file:
+                    convert_file.write(json.dumps((personDetection[0]/200)*100))
                 print(detected)
 
                 # Read detected values from the file
-                with open('dataOutput.txt', 'r') as file:
+                with open('dataOutput2', 'r') as file:
                     detected_from_file = json.load(file)
-		    human_density = subprocess.check_output(['./calc.sh'], shell=False).decode()
+                    rounded = round(detected_from_file, 2)
+
 
                 # Update the label text with the values from the file
-                self.detected_text.set(json.dumps(detected_from_file))
+                self.person_text.set("Number of People Detected " + str(json.dumps(detected)))
+                self.detected_text.set("Density Percentage " + str(rounded) + "%")
                 frame = self.heatmap_obj.generate_heatmap(frame, tracks)
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 self.photo = ImageTk.PhotoImage(image=Image.fromarray(frame))
