@@ -109,7 +109,6 @@ class Heatmap(ttk.Frame):
 
                 # Update the label text with the values from the file
                 self.person_text.set("Number of People Detected " + str(json.dumps(detected)))
-                self.detected_text.set("Density Percentage " + str(rounded) + "%")
                 frame = self.heatmap_obj.generate_heatmap(frame, tracks)
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 self.photo = ImageTk.PhotoImage(image=Image.fromarray(frame))

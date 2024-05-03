@@ -6,32 +6,36 @@ Utilizes YOLO, OpenCV, and other Machine Learning Libraries for detecting human 
 Libraries required:
 
 Import library needed for this project.
-from ultralytics import YOLO
-from ultralytics.solutions import heatmap
+import tkinter as tk
+from tkinter import ttk
+from PIL import Image, ImageTk
 import cv2
 import json
+from ultralytics import YOLO
+from ultralytics.solutions import heatmap
 
 Include pip install instructions
 
-pip install ultralytics
+pip install sv-ttk #installs the UI
+pip install ultralytics #installs the dependencies
 
 
 ## Usage
 How do users use your program/code
 ```
-$ python3 main.py #FOR MAC
-$ python .\main.py #FOR WINDOWS
+$ python3 heatmap.py #FOR MAC
+$ python .\heatmap.py #FOR WINDOWS
 
 ```
 ### Testing
 
-The program will ask for permission to laptop's camera.
-
-The camera window will pop up named "frame" and green box will identify the objects in frame.
+The application will take in a camera source/video source, which it will display directly onto the UI what the source is from. 
+Users will then be able to see what the heatmap is creating through the video source.
 
 ### Utilizing a webcam / camera
 
-In progress
+The webcam is going to capture the data in order for the AI to predict successfully what is in front of it. 
+Then it will create a heatmap based on what is being detected from the AI.
 
 ## Features
 
@@ -39,16 +43,20 @@ What are some of the features of the projects. What can people do and how to use
 1. Camera
 >  > Detector people in static or motion.
 >  > Set more than one camera. Different view points. Will the camera recongize the same human and only count 1.
-3. Sensors
-4. Heat Map
+2. Heat Map
+>  > Creates a heatmap based on the AI detection
+3. AI
+>  > Utilizes the AI to predict what it is seeing on the video source.
 
 ## Sample Image
-Put some screenshots if applicable. 
+![image](https://github.com/kerrycliu/Human-Detection-with-Heat-map/assets/93110676/1d287e7f-d2a5-47c3-969f-f544c534b32e)
 
 ## Roadmap
 1. Using CVAT, an open-source image and video annotation tool, to accurately detect humans only.
-2. Gather human count from each camera frame and store in database.
-3. Generate heatmap based on the data. 
+2. Use Yolov8 as the AI model to predict humans. 
+3. Utilize AI in order to predict a human based on detections.
+4. Gather human count from each camera frame.
+5. Generate heatmap based on the data. 
 
 ## Contacts
 Michelle Fang:
