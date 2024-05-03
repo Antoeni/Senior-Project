@@ -5,19 +5,19 @@ Utilizes YOLO, OpenCV, and other Machine Learning Libraries for detecting human 
 ## Installation
 Libraries required:
 
-Import library needed for this project.
-import tkinter as tk
-from tkinter import ttk
-from PIL import Image, ImageTk
-import cv2
-import json
-from ultralytics import YOLO
-from ultralytics.solutions import heatmap
+Import library needed for this project. <br />
+import tkinter as tk <br />
+from tkinter import ttk <br />
+from PIL import Image, ImageTk <br />
+import cv2 <br />
+import json <br />
+from ultralytics import YOLO <br />
+from ultralytics.solutions import heatmap <br />
 
 Include pip install instructions
 
-pip install sv-ttk #installs the UI
-pip install ultralytics #installs the dependencies
+pip install sv-ttk #installs the UI <br />
+pip install ultralytics #installs the dependencies <br />
 
 
 ## Usage
