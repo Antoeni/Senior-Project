@@ -11,7 +11,7 @@ class Heatmap(ttk.Frame):
         ttk.Frame.__init__(self)
         self.master = master
         self.master.title("Heatmap UI")
-        self.video_source = 'Shibuya crossing real-time.mp4'
+        self.video_source = 'vid1.mp4'
         self.cap = cv2.VideoCapture(self.video_source)
         self.fps = self.cap.get(cv2.CAP_PROP_FPS)
         self.fpsOut = self.fps * 7
@@ -108,7 +108,7 @@ class Heatmap(ttk.Frame):
 
 
                 # Update the label text with the values from the file
-                self.person_text.set("Density Percentage: " + str(rounded) + "%")
+                self.person_text.set("Percentage of people detected: " + str(rounded) + "%")
                 frame = self.heatmap_obj.generate_heatmap(frame, tracks)
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 self.photo = ImageTk.PhotoImage(image=Image.fromarray(frame))
